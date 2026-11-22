@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Эта строчка помогает GitHub правильно находить стили и картинки -->
     <base href="/The-Razzing-project/">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог | Бойцовский клуб</title>
     <meta name="description" content="Каталог брутального кофе и мерча.">
     
+    <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- Подключение стилей -->
     <link rel="stylesheet" href="style.css">
     
+    <!-- Стили для фильтров -->
     <style>
         .filters { display: flex; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; }
         .filter-select, .filter-input {
@@ -27,6 +32,7 @@
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
@@ -34,22 +40,27 @@
             <nav class="nav" id="nav">
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="catalog.html" class="nav-link active">Каталог</a>
-                <a href="login.html" class="nav-link">Вход</a>
+                <!-- Вот та самая ссылка с id="auth-link" -->
+                <a href="login.html" class="nav-link" id="auth-link">Вход</a>
             </nav>
 
             <div class="header-actions">
                 <a href="cart.html" class="cart-btn" style="text-decoration: none;">Корзина (<span id="cart-count">0</span>)</a>
                 <button class="burger" id="burger" aria-label="Открыть меню">
-                    <span></span><span></span><span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
     </header>
 
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main>
         <section class="catalog container" style="padding-top: 60px;">
             <h1 class="hero-title" style="font-size: 42px; text-align: left; margin-bottom: 40px;">КАТАЛОГ</h1>
             
+            <!-- Блок фильтров -->
             <div class="filters">
                 <select class="filter-select" id="sort-select">
                     <option value="popular">Сортировка: По популярности</option>
@@ -66,9 +77,10 @@
                 <input type="text" class="filter-input" id="search-input" placeholder="Поиск по названию...">
             </div>
 
+            <!-- Сетка товаров -->
             <div class="products-grid" id="products-grid">
                 
-                <!-- КОФЕ -->
+                <!-- ================= КОФЕ ================= -->
                 <article class="product-card" data-category="coffee" data-price="250" data-popular="10">
                     <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+1" alt="Эспрессо" class="product-img">
                     <h3 class="product-title">Эспрессо "Тайлер Дёрден"</h3>
@@ -106,7 +118,7 @@
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
-                <!-- МЕРЧ -->
+                <!-- ================= МЕРЧ ================= -->
                 <article class="product-card" data-category="merch" data-price="1500" data-popular="10">
                     <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Merch+1" alt="Футболка" class="product-img">
                     <h3 class="product-title">Футболка "Первое правило"</h3>
@@ -145,16 +157,26 @@
                 </article>
 
             </div>
+
+            <!-- Кнопка "Показать ещё" -->
+            <div class="load-more-container">
+                <button class="btn btn-primary" style="background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color);">Показать ещё</button>
+            </div>
         </section>
     </main>
 
+    <!-- ПОДВАЛ -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Fight Club Coffee. Учебный проект.</p>
+            <p>г. Москва, ул. Бойцовская, д. 1. Тел: +7 (999) 123-45-67</p>
         </div>
     </footer>
 
+    <!-- Подключение основного скрипта -->
     <script src="script.js"></script>
+    
+    <!-- Скрипт для фильтрации и сортировки -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const categorySelect = document.getElementById('category-select');
