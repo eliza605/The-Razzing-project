@@ -6,8 +6,8 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кофейня "Бойцовский клуб" | Доставка кофе</title>
-    <meta name="description" content="Брутальный кофе для настоящих бойцов. Доставка эспрессо, латте и мерча прямо в ваш офис.">
+    <title>Каталог напитков | Бойцовский клуб</title>
+    <meta name="description" content="Каталог брутального кофе. Выбирайте эспрессо, латте и капучино для настоящих бойцов.">
     
     <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +16,33 @@
     
     <!-- Подключение стилей -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Небольшие дополнительные стили для фильтров (чтобы не ломать ваш style.css) -->
+    <style>
+        .filters {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-select, .filter-input {
+            padding: 10px 15px;
+            background-color: var(--card-bg);
+            color: white;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            outline: none;
+        }
+        .filter-input {
+            flex-grow: 1;
+            max-width: 400px;
+        }
+        .load-more-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
 
@@ -25,8 +52,9 @@
             <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
             
             <nav class="nav" id="nav">
-                <a href="index.html" class="nav-link active">Главная</a>
-                <a href="#" class="nav-link">Каталог</a>
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link active">Каталог</a>
+                <!-- Ссылки на другие страницы (пока заглушки) -->
                 <a href="#" class="nav-link">О нас</a>
                 <a href="#" class="nav-link">Контакты</a>
             </nav>
@@ -44,19 +72,26 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main>
-        <!-- Баннер -->
-        <section class="hero">
-            <div class="container">
-                <h1 class="hero-title">ПЕРВОЕ ПРАВИЛО КЛУБА:<br>НЕ ПРОЛИВАЙ КОФЕ</h1>
-                <p class="hero-subtitle">Мы не продаем кофе. Мы продаем бодрость для тех, кто готов сражаться.</p>
-                <a href="#catalog" class="btn btn-primary">Выбрать напиток</a>
-            </div>
-        </section>
-
-        <!-- Каталог -->
-        <section class="catalog container" id="catalog">
-            <h2 class="section-title">Популярные сорта</h2>
+        <section class="catalog container" style="padding-top: 60px;">
+            <!-- Заголовок страницы -->
+            <h1 class="hero-title" style="font-size: 42px; text-align: left; margin-bottom: 40px;">КАТАЛОГ НАПИТКОВ</h1>
             
+            <!-- Блок фильтров и сортировки (Требование из ТЗ) -->
+            <div class="filters">
+                <select class="filter-select">
+                    <option>Сортировка: По популярности</option>
+                    <option>Сортировка: Сначала дешевле</option>
+                    <option>Сортировка: Сначала дороже</option>
+                </select>
+                <select class="filter-select">
+                    <option>Категория: Все</option>
+                    <option>Категория: Кофе</option>
+                    <option>Категория: Мерч</option>
+                </select>
+                <input type="text" class="filter-input" placeholder="Поиск по названию...">
+            </div>
+
+            <!-- Сетка товаров -->
             <div class="products-grid">
                 <!-- Карточка 1 -->
                 <article class="product-card">
@@ -81,6 +116,35 @@
                     <p class="product-price">300 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
+
+                <!-- Карточка 4 -->
+                <article class="product-card">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+4" alt="Американо Бойцовский" class="product-img">
+                    <h3 class="product-title">Американо "Бойцовский"</h3>
+                    <p class="product-price">200 ₽</p>
+                    <button class="btn btn-primary add-to-cart">В корзину</button>
+                </article>
+
+                <!-- Карточка 5 -->
+                <article class="product-card">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+5" alt="Флэт Уайт Тайлер" class="product-img">
+                    <h3 class="product-title">Флэт Уайт "Тайлер"</h3>
+                    <p class="product-price">280 ₽</p>
+                    <button class="btn btn-primary add-to-cart">В корзину</button>
+                </article>
+
+                <!-- Карточка 6 -->
+                <article class="product-card">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+6" alt="Раф Марла Сингер" class="product-img">
+                    <h3 class="product-title">Раф "Марла Сингер"</h3>
+                    <p class="product-price">350 ₽</p>
+                    <button class="btn btn-primary add-to-cart">В корзину</button>
+                </article>
+            </div>
+
+            <!-- Кнопка "Показать ещё" (Пагинация из ТЗ) -->
+            <div class="load-more-container">
+                <button class="btn btn-primary" style="background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color);">Показать ещё</button>
             </div>
         </section>
     </main>
