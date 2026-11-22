@@ -1,258 +1,35 @@
-/* --- СБРОС СТИЛЕЙ --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+document.addEventListener('DOMContentLoaded', function() {
 
-/* --- ПЕРЕМЕННЫЕ (ЦВЕТА И ШРИФТЫ) --- */
-:root {
-    --bg-color: #0a0a0a;      /* Черный фон */
-    --card-bg: #1e1e1e;       /* Темно-серый для карточек */
-    --text-color: #ffffff;    /* Белый текст */
-    --text-muted: #aaaaaa;    /* Серый текст */
-    --accent-color: #ff2a6d;  /* Розовый акцент */
-    --accent-hover: #d61a54;  /* Розовый потемнее */
-    
-    --font-heading: 'Oswald', sans-serif;
-    --font-body: 'Roboto', sans-serif;
-}
+    // 1. Работа мобильного меню (бургер)
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
 
-body {
-    font-family: var(--font-body);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden; /* Защита от горизонтальной прокрутки */
-}
-
-/* --- ОБЩИЕ КЛАССЫ --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-h1, h2, h3, .logo {
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-}
-
-/* Кнопки */
-.btn {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: #ffffff;
-    padding: 12px 24px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 16px;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.btn:hover {
-    background-color: var(--accent-hover);
-}
-
-/* --- ШАПКА (HEADER) --- */
-.header {
-    background-color: #000000;
-    border-bottom: 2px solid var(--accent-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-}
-
-.logo {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.nav {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-link {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-}
-
-.nav-link:hover, .nav-link.active {
-    color: var(--accent-color);
-}
-
-.cart-btn {
-    background: none;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 8px 16px;
-    font-weight: 700;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s;
-}
-
-.cart-btn:hover {
-    background: var(--accent-color);
-    color: #fff;
-}
-
-/* Бургер-меню (скрыто на ПК) */
-.burger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.burger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--accent-color);
-}
-
-/* --- БАННЕР (HERO) --- */
-.hero {
-    padding: 120px 0;
-    text-align: center;
-}
-
-.hero-title {
-    font-size: 56px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.hero-subtitle {
-    font-size: 20px;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-}
-
-/* --- КАТАЛОГ --- */
-.catalog {
-    padding: 60px 0;
-}
-
-.section-title {
-    font-size: 36px;
-    margin-bottom: 40px;
-    text-align: center;
-    color: var(--text-color);
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.product-card {
-    background-color: var(--card-bg);
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #333;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
-}
-
-.product-img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.product-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.product-price {
-    font-size: 24px;
-    color: var(--accent-color);
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-/* --- ПОДВАЛ --- */
-.footer {
-    background-color: #000;
-    text-align: center;
-    padding: 40px 0;
-    margin-top: 60px;
-    border-top: 2px solid var(--accent-color);
-    color: var(--text-muted);
-}
-
-/* --- АДАПТИВ (МОБИЛЬНАЯ ВЕРСИЯ) --- */
-@media (max-width: 768px) {
-    /* Прячем обычное меню */
-    .nav {
-        display: none; 
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background-color: #000;
-        flex-direction: column;
-        text-align: center;
-        padding: 20px 0;
-        border-bottom: 2px solid var(--accent-color);
+    if (burger && nav) {
+        burger.addEventListener('click', function() {
+            nav.classList.toggle('active');
+        });
     }
 
-    /* Показываем меню при клике (класс добавляет JS) */
-    .nav.active {
-        display: flex;
-    }
+    // 2. Имитация корзины
+    let cartCount = 0;
+    const cartCountDisplay = document.getElementById('cart-count');
+    const addButtons = document.querySelectorAll('.add-to-cart');
 
-    .nav-link {
-        margin: 10px 0;
+    if (addButtons.length > 0 && cartCountDisplay) {
+        addButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                cartCount++;
+                cartCountDisplay.textContent = cartCount;
+                
+                const originalText = button.textContent;
+                button.textContent = 'Добавлено!';
+                button.style.backgroundColor = '#4CAF50'; // Зеленый
+                
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.style.backgroundColor = '';
+                }, 1000);
+            });
+        });
     }
-
-    /* Показываем бургер */
-    .burger {
-        display: flex;
-    }
-
-    .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    /* Уменьшаем шрифты */
-    .hero-title {
-        font-size: 36px;
-    }
-    
-    .hero-subtitle {
-        font-size: 16px;
-    }
-}
+});
