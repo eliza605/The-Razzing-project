@@ -17,7 +17,7 @@
     <!-- Подключение стилей -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Небольшие дополнительные стили для фильтров (чтобы не ломать ваш style.css) -->
+    <!-- Небольшие дополнительные стили для фильтров -->
     <style>
         .filters {
             display: flex;
@@ -52,9 +52,9 @@
             <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
             
             <nav class="nav" id="nav">
+                <!-- ВОТ ЗДЕСЬ ССЫЛКА НА ГЛАВНУЮ -->
                 <a href="index.html" class="nav-link">Главная</a>
                 <a href="catalog.html" class="nav-link active">Каталог</a>
-                <!-- Ссылки на другие страницы (пока заглушки) -->
                 <a href="#" class="nav-link">О нас</a>
                 <a href="#" class="nav-link">Контакты</a>
             </nav>
@@ -73,10 +73,9 @@
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main>
         <section class="catalog container" style="padding-top: 60px;">
-            <!-- Заголовок страницы -->
             <h1 class="hero-title" style="font-size: 42px; text-align: left; margin-bottom: 40px;">КАТАЛОГ НАПИТКОВ</h1>
             
-            <!-- Блок фильтров и сортировки (Требование из ТЗ) -->
+            <!-- Блок фильтров и сортировки -->
             <div class="filters">
                 <select class="filter-select">
                     <option>Сортировка: По популярности</option>
@@ -93,56 +92,50 @@
 
             <!-- Сетка товаров -->
             <div class="products-grid">
-                <!-- Карточка 1 -->
                 <article class="product-card">
-                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+1" alt="Эспрессо Тайлер Дёрден" class="product-img">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+1" alt="Эспрессо" class="product-img">
                     <h3 class="product-title">Эспрессо "Тайлер Дёрден"</h3>
                     <p class="product-price">250 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
-                <!-- Карточка 2 -->
                 <article class="product-card">
-                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+2" alt="Латте Проект Разгром" class="product-img">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+2" alt="Латте" class="product-img">
                     <h3 class="product-title">Латте "Проект Разгром"</h3>
                     <p class="product-price">320 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
-                <!-- Карточка 3 -->
                 <article class="product-card">
-                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+3" alt="Капучино Мыло" class="product-img">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+3" alt="Капучино" class="product-img">
                     <h3 class="product-title">Капучино "Мыло"</h3>
                     <p class="product-price">300 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
-                <!-- Карточка 4 -->
                 <article class="product-card">
-                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+4" alt="Американо Бойцовский" class="product-img">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+4" alt="Американо" class="product-img">
                     <h3 class="product-title">Американо "Бойцовский"</h3>
                     <p class="product-price">200 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
-                <!-- Карточка 5 -->
                 <article class="product-card">
-                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+5" alt="Флэт Уайт Тайлер" class="product-img">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+5" alt="Флэт Уайт" class="product-img">
                     <h3 class="product-title">Флэт Уайт "Тайлер"</h3>
                     <p class="product-price">280 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
-                <!-- Карточка 6 -->
                 <article class="product-card">
-                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+6" alt="Раф Марла Сингер" class="product-img">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+6" alt="Раф" class="product-img">
                     <h3 class="product-title">Раф "Марла Сингер"</h3>
                     <p class="product-price">350 ₽</p>
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
             </div>
 
-            <!-- Кнопка "Показать ещё" (Пагинация из ТЗ) -->
+            <!-- Кнопка "Показать ещё" -->
             <div class="load-more-container">
                 <button class="btn btn-primary" style="background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color);">Показать ещё</button>
             </div>
