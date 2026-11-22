@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <base href="/The-Razzing-project/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Бойцовский клуб</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .profile-container { padding: 60px 0; display: flex; gap: 40px; }
+        .profile-sidebar { width: 250px; background: var(--card-bg); padding: 20px; border: 1px solid #333; }
+        .profile-sidebar h3 { color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+        .profile-sidebar button { 
+            display: block; width: 100%; text-align: left; padding: 10px; 
+            background: none; border: none; color: white; cursor: pointer; 
+            font-family: var(--font-body); font-size: 16px; margin-bottom: 5px;
+        }
+        .profile-sidebar button:hover, .profile-sidebar button.active { 
+            background: var(--accent-color); color: white; 
+        }
+        
+        .profile-content { flex-grow: 1; background: var(--card-bg); padding: 30px; border: 1px solid #333; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .profile-content h2 { margin-bottom: 20px; color: white; }
+        .user-info p { font-size: 18px; margin-bottom: 10px; }
+        .user-info span { color: var(--accent-color); font-weight: bold; }
+        
+        /* Стили для имитации истории заказов */
+        .order-item { border: 1px solid #444; padding: 15px; margin-bottom: 15px; border-radius: 4px; }
+        .order-status { color: #4CAF50; font-weight: bold; }
+        
+        @media (max-width: 768px) {
+            .profile-container { flex-direction: column; }
+            .profile-sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
+            <nav class="nav" id="nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="profile.html" class="nav-link active" id="auth-link">Личный кабинет</a>
+            </nav>
+            <div class="header-actions">
+                <a href="cart.html" class="cart-btn" style="text-decoration: none;">Корзина (<span id="cart-count">0</span>)</a>
+                <button class="burger" id="burger"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container profile-container">
+            <!-- Боковое меню -->
+            <aside class="profile-sidebar">
+                <h3>Меню клуба</h3>
+                <button class="tab-btn active" onclick="openTab('tab-profile', this)">Мой профиль</button>
+                <button class="tab-btn" onclick="openTab('tab-orders', this)">История заказов</button>
+                <button class="tab-btn" onclick="openTab('tab-favorites', this)">Избранное</button>
+                <button onclick="logout()" style="color: #ff4d4d; margin-top: 20px;">Выйти из клуба</button>
+            </aside>
+
+            <!-- Контентная часть -->
+            <section class="profile-content">
+                
+                <!-- Вкладка 1: Профиль -->
+                <div id="tab-profile" class="tab-content active">
+                    <h2>ДАННЫЕ БОЙЦА</h2>
+                    <div class="user-info">
+                        <p>Ваш E-mail: <span id="user-email">Загрузка...</span></p>
+                        <p>Статус: <span style="color: #4CAF50;">Участник клуба</span></p>
+                        <p>Дата регистрации: 22.11.2026</p>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 20px;" onclick="alert('Редактирование профиля в разработке (нужен бэкенд)')">Редактировать профиль</button>
+                </div>
+
+                <!-- Вкладка 2: История заказов -->
+                <div id="tab-orders" class="tab-content">
+                    <h2>ИСТОРИЯ ЗАКАЗОВ</h2>
+                    <div class="order-item">
+                        <p><strong>Заказ #1024</strong> от 20.11.2026</p>
+                        <p>Эспрессо "Тайлер Дёрден" (1 шт), Мыло "Розовое" (2 шт)</p>
+                        <p>Сумма: 1250 ₽</p>
+                        <p>Статус: <span class="order-status">Выполнен</span></p>
+                    </div>
+                    <div class="order-item">
+                        <p><strong>Заказ #1025</strong> от 21.11.2026</p>
+                        <p>Худи "Fight Club" (1 шт)</p>
+                        <p>Сумма: 3500 ₽</p>
+                        <p>Статус: <span style="color: #ffb703;">В доставке</span></p>
+                    </div>
+                </div>
+
+                <!-- Вкладка 3: Избранное -->
+                <div id="tab-favorites" class="tab-content">
+                    <h2>ИЗБРАННОЕ</h2>
+                    <p style="color: var(--text-muted);">Вы пока не добавили ни одного товара в избранное.</p>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    
+    <script>
+        // 1. Проверка: если пользователь не вошел, выкидываем на страницу входа
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        } else {
+            // Показываем email пользователя
+            document.getElementById('user-email').textContent = currentUser;
+        }
+
+        // 2. Логика переключения вкладок
+        function openTab(tabId, btnElement) {
+            // Скрываем все вкладки
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Убираем активный класс у всех кнопок
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Показываем нужную вкладку и делаем кнопку активной
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>
