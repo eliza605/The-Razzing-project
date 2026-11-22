@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Эта строчка помогает GitHub правильно находить стили и картинки -->
     <base href="/The-Razzing-project/">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кофейня "Бойцовский клуб" | Доставка кофе</title>
     <meta name="description" content="Брутальный кофе для настоящих бойцов. Доставка эспрессо, латте и мерча прямо в ваш офис.">
     
+    <!-- Подключение шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
+    <!-- Подключение стилей -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
@@ -22,11 +27,11 @@
             <nav class="nav" id="nav">
                 <a href="index.html" class="nav-link active">Главная</a>
                 <a href="catalog.html" class="nav-link">Каталог</a>
-                <a href="login.html" class="nav-link">Вход</a>
+                <!-- Вот та самая ссылка с id="auth-link" -->
+                <a href="login.html" class="nav-link" id="auth-link">Вход</a>
             </nav>
 
             <div class="header-actions">
-                <!-- Теперь это ссылка на корзину -->
                 <a href="cart.html" class="cart-btn" style="text-decoration: none;">Корзина (<span id="cart-count">0</span>)</a>
                 <button class="burger" id="burger" aria-label="Открыть меню">
                     <span></span>
@@ -37,7 +42,9 @@
         </div>
     </header>
 
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main>
+        <!-- Баннер -->
         <section class="hero">
             <div class="container">
                 <h1 class="hero-title">ПЕРВОЕ ПРАВИЛО КЛУБА:<br>НЕ ПРОЛИВАЙ КОФЕ</h1>
@@ -46,10 +53,12 @@
             </div>
         </section>
 
+        <!-- Популярные товары -->
         <section class="catalog container" id="catalog">
             <h2 class="section-title">Популярные сорта</h2>
             
             <div class="products-grid">
+                <!-- Карточка 1 -->
                 <article class="product-card">
                     <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+1" alt="Эспрессо Тайлер Дёрден" class="product-img">
                     <h3 class="product-title">Эспрессо "Тайлер Дёрден"</h3>
@@ -57,6 +66,7 @@
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
+                <!-- Карточка 2 -->
                 <article class="product-card">
                     <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+2" alt="Латте Проект Разгром" class="product-img">
                     <h3 class="product-title">Латте "Проект Разгром"</h3>
@@ -64,6 +74,7 @@
                     <button class="btn btn-primary add-to-cart">В корзину</button>
                 </article>
 
+                <!-- Карточка 3 -->
                 <article class="product-card">
                     <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+3" alt="Капучино Мыло" class="product-img">
                     <h3 class="product-title">Капучино "Мыло"</h3>
@@ -74,6 +85,7 @@
         </section>
     </main>
 
+    <!-- ПОДВАЛ -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Fight Club Coffee. Учебный проект.</p>
@@ -81,6 +93,7 @@
         </div>
     </footer>
 
+    <!-- Подключение скриптов -->
     <script src="script.js"></script>
 </body>
 </html>
