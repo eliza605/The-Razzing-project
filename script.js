@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. Работа мобильного меню (бургер)
+    // --- 1. РАБОТА МОБИЛЬНОГО МЕНЮ (БУРГЕР) ---
     const burger = document.getElementById('burger');
     const nav = document.getElementById('nav');
 
@@ -10,20 +10,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. Имитация корзины
-    let cartCount = 0;
-    const cartCountDisplay = document.getElementById('cart-count');
-    const addButtons = document.querySelectorAll('.add-to-cart');
+    // --- 2. ОБНОВЛЕНИЕ СЧЕТЧИКА ПРИ ЗАГРУЗКЕ ---
+    updateCartCount();
 
-    if (addButtons.length > 0 && cartCountDisplay) {
+    // --- 3. ДОБАВЛЕНИЕ В КОРЗИНУ (С СОХРАНЕНИЕМ) ---
+    const addButtons = document.querySelectorAll('.add-to-cart');
+    
+    if (addButtons.length > 0) {
         addButtons.forEach(function(button) {
             button.addEventListener('click', function() {
-                cartCount++;
-                cartCountDisplay.textContent = cartCount;
+                // Находим карточку товара, в которой находится кнопка
+                const card = this.closest('.product-card');
+                const title = card.querySelector('.product-title').textContent;
+                // Берем цену и оставляем только цифры (убираем знак рубля)
+                const priceText = card.querySelector('.product-price').textContent;
+                const price = parseInt(priceText.replace(/\D/g, '')); 
+                const img = card.querySelector('.product-img').src;
+
+                // Получаем текущую корзину из памяти браузера
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Проверяем, есть ли уже такой товар
+                const existingItem = cart.find(item => item.title === title);
+                if (existingItem) {
+                    existingItem.qty += 1; // Если есть, просто добавляем +1
+                } else {
+                    cart.push({ title: title, price: price, img: img, qty: 1 }); // Если нет, добавляем новый
+                }
+
+                // Сохраняем обратно в память
+                localStorage.setItem('cart', JSON.stringify(cart));
                 
+                // Обновляем цифру в шапке
+                updateCartCount();
+                
+                // Визуальный эффект на кнопке
                 const originalText = button.textContent;
                 button.textContent = 'Добавлено!';
-                button.style.backgroundColor = '#4CAF50'; // Зеленый
+                button.style.backgroundColor = '#4CAF50'; 
                 
                 setTimeout(function() {
                     button.textContent = originalText;
@@ -33,3 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Функция для подсчета общего количества товаров
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    const cartCountDisplay = document.getElementById('cart-count');
+    if (cartCountDisplay) {
+        cartCountDisplay.textContent = totalQty;
+    }
+}
