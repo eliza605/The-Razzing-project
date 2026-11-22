@@ -5,76 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход в личный кабинет | Бойцовский клуб</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     
-    <!-- Стили специально для страницы входа -->
     <style>
         .auth-container {
-            max-width: 400px;
-            margin: 80px auto;
-            background-color: var(--card-bg);
-            padding: 40px;
-            border: 1px solid #333;
-            border-radius: 4px;
+            max-width: 400px; margin: 80px auto; background-color: var(--card-bg);
+            padding: 40px; border: 1px solid #333; border-radius: 4px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .auth-container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--accent-color);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
+        .auth-container h2 { text-align: center; margin-bottom: 30px; color: var(--accent-color); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted); }
         .form-group input {
-            width: 100%;
-            padding: 12px;
-            background-color: #0a0a0a;
-            border: 1px solid #444;
-            color: white;
-            border-radius: 4px;
-            font-family: var(--font-body);
-            transition: border-color 0.3s;
+            width: 100%; padding: 12px; background-color: #0a0a0a;
+            border: 1px solid #444; color: white; border-radius: 4px;
+            font-family: var(--font-body); transition: border-color 0.3s;
         }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-        .auth-btn {
-            width: 100%;
-            margin-top: 10px;
-        }
+        .form-group input:focus { outline: none; border-color: var(--accent-color); }
+        .auth-btn { width: 100%; margin-top: 10px; }
         .auth-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
+            display: block; text-align: center; margin-top: 20px;
+            color: var(--text-muted); text-decoration: none; font-size: 14px;
         }
-        .auth-link:hover {
-            color: var(--accent-color);
-        }
-        .error-msg {
-            color: var(--accent-color);
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
+        .auth-link:hover { color: var(--accent-color); }
+        .error-msg { color: var(--accent-color); font-size: 12px; margin-top: 5px; display: none; }
     </style>
 </head>
 <body>
 
-    <!-- ШАПКА -->
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
@@ -84,17 +47,15 @@
                 <a href="login.html" class="nav-link active">Вход</a>
             </nav>
             <div class="header-actions">
-                <button class="cart-btn" id="cart-btn">Корзина (<span id="cart-count">0</span>)</button>
+                <a href="cart.html" class="cart-btn" style="text-decoration: none;">Корзина (<span id="cart-count">0</span>)</a>
                 <button class="burger" id="burger"><span></span><span></span><span></span></button>
             </div>
         </div>
     </header>
 
-    <!-- ФОРМА ВХОДА -->
     <main>
         <div class="auth-container">
             <h2>ВХОД В КЛУБ</h2>
-            <!-- id="login-form" нужен для JS -->
             <form id="login-form">
                 <div class="form-group">
                     <label for="email">E-mail</label>
@@ -103,7 +64,7 @@
                 <div class="form-group">
                     <label for="password">Пароль</label>
                     <input type="password" id="password" placeholder="••••••••" required>
-                    <div class="error-msg" id="error-msg">Неверный пароль или E-mail</div>
+                    <div class="error-msg" id="error-msg">Пароль должен быть не менее 4 символов</div>
                 </div>
                 <button type="submit" class="btn btn-primary auth-btn">ВОЙТИ</button>
             </form>
@@ -112,7 +73,6 @@
         </div>
     </main>
 
-    <!-- ПОДВАЛ -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Fight Club Coffee. Учебный проект.</p>
@@ -121,22 +81,17 @@
 
     <script src="script.js"></script>
     
-    <!-- СКРИПТ ИМИТАЦИИ ВХОДА -->
     <script>
         document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Останавливаем перезагрузку страницы
-            
+            event.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('error-msg');
 
-            // Имитация проверки (пока бэкенда нет)
-            // Если пароль меньше 4 символов - показываем ошибку
             if (password.length < 4) {
                 errorMsg.style.display = 'block';
             } else {
                 errorMsg.style.display = 'none';
-                // Если всё ок - показываем сообщение и перекидываем на главную
                 alert('Добро пожаловать в Бойцовский клуб, ' + email + '!');
                 window.location.href = 'index.html';
             }
