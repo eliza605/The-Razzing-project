@@ -1,69 +1,101 @@
-document.addEventListener('DOMContentLoaded', function() {
-
-    // --- 1. РАБОТА МОБИЛЬНОГО МЕНЮ (БУРГЕР) ---
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav');
-
-    if (burger && nav) {
-        burger.addEventListener('click', function() {
-            nav.classList.toggle('active');
-        });
-    }
-
-    // --- 2. ОБНОВЛЕНИЕ СЧЕТЧИКА ПРИ ЗАГРУЗКЕ ---
-    updateCartCount();
-
-    // --- 3. ДОБАВЛЕНИЕ В КОРЗИНУ (С СОХРАНЕНИЕМ) ---
-    const addButtons = document.querySelectorAll('.add-to-cart');
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Эта строчка помогает GitHub правильно находить стили и картинки -->
+    <base href="/The-Razzing-project/">
     
-    if (addButtons.length > 0) {
-        addButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                // Находим карточку товара, в которой находится кнопка
-                const card = this.closest('.product-card');
-                const title = card.querySelector('.product-title').textContent;
-                // Берем цену и оставляем только цифры (убираем знак рубля)
-                const priceText = card.querySelector('.product-price').textContent;
-                const price = parseInt(priceText.replace(/\D/g, '')); 
-                const img = card.querySelector('.product-img').src;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кофейня "Бойцовский клуб" | Доставка кофе</title>
+    <meta name="description" content="Брутальный кофе для настоящих бойцов. Доставка эспрессо, латте и мерча прямо в ваш офис.">
+    
+    <!-- Подключение шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-                // Получаем текущую корзину из памяти браузера
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">FIGHT CLUB COFFEE</a>
+            
+            <nav class="nav" id="nav">
+                <a href="index.html" class="nav-link active">Главная</a>
+                <!-- ВОТ ЗДЕСЬ ИСПРАВЛЕНА ССЫЛКА -->
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="#" class="nav-link">О нас</a>
+                <a href="#" class="nav-link">Контакты</a>
+            </nav>
 
-                // Проверяем, есть ли уже такой товар
-                const existingItem = cart.find(item => item.title === title);
-                if (existingItem) {
-                    existingItem.qty += 1; // Если есть, просто добавляем +1
-                } else {
-                    cart.push({ title: title, price: price, img: img, qty: 1 }); // Если нет, добавляем новый
-                }
+            <div class="header-actions">
+                <button class="cart-btn" id="cart-btn">Корзина (<span id="cart-count">0</span>)</button>
+                <a href="login.html" class="cart-btn" style="text-decoration: none; margin-left: 10px;">Вход</a>
+                <button class="burger" id="burger" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-                // Сохраняем обратно в память
-                localStorage.setItem('cart', JSON.stringify(cart));
-                
-                // Обновляем цифру в шапке
-                updateCartCount();
-                
-                // Визуальный эффект на кнопке
-                const originalText = button.textContent;
-                button.textContent = 'Добавлено!';
-                button.style.backgroundColor = '#4CAF50'; 
-                
-                setTimeout(function() {
-                    button.textContent = originalText;
-                    button.style.backgroundColor = '';
-                }, 1000);
-            });
-        });
-    }
-});
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main>
+        <!-- Баннер -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero-title">ПЕРВОЕ ПРАВИЛО КЛУБА:<br>НЕ ПРОЛИВАЙ КОФЕ</h1>
+                <p class="hero-subtitle">Мы не продаем кофе. Мы продаем бодрость для тех, кто готов сражаться.</p>
+                <a href="#catalog" class="btn btn-primary">Выбрать напиток</a>
+            </div>
+        </section>
 
-// Функция для подсчета общего количества товаров
-function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-    const cartCountDisplay = document.getElementById('cart-count');
-    if (cartCountDisplay) {
-        cartCountDisplay.textContent = totalQty;
-    }
-}
+        <!-- Каталог (Популярные) -->
+        <section class="catalog container" id="catalog">
+            <h2 class="section-title">Популярные сорта</h2>
+            
+            <div class="products-grid">
+                <!-- Карточка 1 -->
+                <article class="product-card">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+1" alt="Эспрессо Тайлер Дёрден" class="product-img">
+                    <h3 class="product-title">Эспрессо "Тайлер Дёрден"</h3>
+                    <p class="product-price">250 ₽</p>
+                    <button class="btn btn-primary add-to-cart">В корзину</button>
+                </article>
+
+                <!-- Карточка 2 -->
+                <article class="product-card">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+2" alt="Латте Проект Разгром" class="product-img">
+                    <h3 class="product-title">Латте "Проект Разгром"</h3>
+                    <p class="product-price">320 ₽</p>
+                    <button class="btn btn-primary add-to-cart">В корзину</button>
+                </article>
+
+                <!-- Карточка 3 -->
+                <article class="product-card">
+                    <img src="https://placehold.co/400x200/1e1e1e/ff2a6d?text=Coffee+3" alt="Капучино Мыло" class="product-img">
+                    <h3 class="product-title">Капучино "Мыло"</h3>
+                    <p class="product-price">300 ₽</p>
+                    <button class="btn btn-primary add-to-cart">В корзину</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Fight Club Coffee. Учебный проект.</p>
+            <p>г. Москва, ул. Бойцовская, д. 1. Тел: +7 (999) 123-45-67</p>
+        </div>
+    </footer>
+
+    <!-- Подключение скриптов -->
+    <script src="script.js"></script>
+</body>
+</html>
